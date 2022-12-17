@@ -1,0 +1,48 @@
+class Solution:
+
+    def three(self,row_start,row_end,col_start,col_end,grid):
+
+        total = 0
+
+        for rw in range(row_start, row_end+1):
+            for cl in range(col_start, col_end+1):
+                total += grid[rw][cl]
+
+        #remove 2 elements to create the I 
+        total -= grid[row_end-1][col_start]
+        total -= grid[row_end -1][col_end]    
+        return total
+
+    def maxSum(self, grid: List[List[int]]) -> int:
+        row_start = 0
+        row_end = 2
+        col_start = 0
+        col_end = 2
+
+        grid_end  = len(grid[0])-1
+        grid_row_end = len(grid)-1
+
+        result = 0
+
+        while row_end <= grid_row_end:
+            while col_end <= grid_end:
+               
+                result =  max(result, self.three(row_start,row_end,col_start,col_end,grid))
+                col_end+=1
+                col_start+=1
+
+            row_start+=1
+            row_end+=1
+            col_start = 0
+            col_end = 2
+          
+            
+
+
+
+      
+ 
+
+
+
+        return result
