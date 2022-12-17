@@ -1,0 +1,30 @@
+class Solution:
+    def transpose(self, matrix: List[List[int]]) -> List[List[int]]:
+
+        #first find row and column
+        row = len(matrix)
+        column = len(matrix[0])
+        nw = []
+     
+        for i in range(column):
+            temp= []
+            for j in range(row):
+                
+                temp.append(0)
+              
+            nw.append(temp)
+
+            
+          
+
+    
+
+        for x in range(row):
+            for y in range(column):
+                value = matrix[x][y]
+              
+
+                nw[y][x] = value
+        return nw
+             
+                
