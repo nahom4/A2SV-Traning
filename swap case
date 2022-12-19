@@ -1,0 +1,10 @@
+def swap_case(s):
+    reverse = ''
+    for x in s:
+        if x.isupper():
+            reverse += x.lower()
+        else:
+            reverse += x.upper()
+    return reverse
+
+if __name__ == '__main__':
