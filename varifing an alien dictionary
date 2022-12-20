@@ -1,0 +1,50 @@
+class Solution:
+    def isAlienSorted(self, words: List[str], order: str) -> bool:
+
+        #lets prepare a dictionary to map a number that reflects their order  in the order list
+        order_value = {}
+        for i,x in enumerate(order):
+            order_value[x] = i
+
+   
+
+        for i in range(len(words)):
+            for check in range(len(words)-1):
+                #now i compare word with the element at check
+                index = 0
+                while True:
+
+
+                    if (len(words[check]) == index or len(words[check+1]) ==index):
+
+                        print("get's here")   
+                        if (len(words[check+1]) < len(words[check])):
+                            return False
+                             
+                        else: 
+                            break      
+                    
+                    if order_value[words[check+1][index]] < order_value[words[check][index]]:
+
+                       return False
+                        
+                    elif order_value[words[check+1][index]] == order_value[words[check][index]]:
+                        
+                 
+
+                        index+=1
+                        continue
+                    else:
+                        break
+                    print(index)
+                   
+
+        return True
+
+    
+
+
+
+
+
+        
