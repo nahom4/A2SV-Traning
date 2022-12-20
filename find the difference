@@ -1,0 +1,20 @@
+class Solution:
+    def findTheDifference(self, s: str, t: str) -> str:
+        
+        #prepare a dictionary for both strings
+        s_dic = {}
+        for x in s:
+            s_dic[x] = s_dic.get(x,0)+1
+            
+        t_dic = {}
+        
+        for x in t:
+            t_dic[x] = t_dic.get(x,0)+1
+            
+        print(t_dic,s_dic)
+        
+        for key in t_dic:
+            if t_dic[key] != s_dic.get(key,0):
+                return key
+            else:
+                continue
