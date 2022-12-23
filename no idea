@@ -1,0 +1,15 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+
+length = input()
+n = [int(n) for n in input().split()]
+A = {int(n) for n in input().split()}
+B = {int(n) for n in input().split()}
+happy = 0
+
+for element in n:
+    if element in A:
+        happy+=1
+    if element in B:
+        happy-=1
+            
+print(happy)
