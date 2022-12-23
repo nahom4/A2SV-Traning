@@ -1,0 +1,72 @@
+
+
+
+test = int(input())
+
+result = []
+
+def algo(blocks,size):
+    #the main trick pick the largest of left or right that is smaller than the        #top element of the pile
+    temp = []
+   
+
+    for _ in range(size):
+        left = blocks[0]
+        right = blocks[-1]
+   
+        if temp:
+            if left > right:
+                
+                if left <= temp[-1]:
+                    temp.append(left)
+                    blocks.remove(left)
+                elif right <= temp[-1]:
+                    temp.append(right)
+                    blocks.pop()
+                else:
+                    return 'No'
+                    
+                    
+            else:
+               
+                if right <= temp[-1]:
+                    temp.append(right)
+                    blocks.pop()
+                elif left <= temp[-1]:
+                    temp.append(left)
+                    blocks.remove(left)
+                else:
+                    return 'No'
+        else:
+            
+             if left > right:
+             
+                temp.append(left)
+                blocks.remove(left)
+                
+             else:
+                  temp.append(right)
+                  blocks.pop()
+                
+            
+            
+            
+                    
+            
+    return 'Yes'
+            
+
+
+for _ in range(test):
+    size= int(input())
+    blocks = [int(n) for n in input().split()]
+    result.append(algo(blocks,size))
+    
+
+    
+    
+    
+    
+    
+for res in result:
+    print(res)
