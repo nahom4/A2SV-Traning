@@ -1,0 +1,20 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+
+num = int(input())
+ls = []
+count = {}
+for _ in range(num):
+    word = input()
+    
+    count[word] = count.get(word,0)+1
+    
+line= ''
+total = 0
+for x in count:
+    total +=1
+    line+= str(count[x])+" "
+    
+print(total)
+print(line)
+    
+    
