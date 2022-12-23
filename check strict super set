@@ -1,0 +1,30 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+
+big = [int(n) for n in input().split()]
+size = int(input())
+
+def check(small):
+    for value in small:
+        if value in big:
+            continue
+        else:
+            return False
+    if len(small) < len(big):
+        return True
+    else:
+        return False
+    
+ans =[]
+for _ in range(size):
+    small = [int(m) for m in input().split()]
+    ans.append(check(small))
+def valid():
+    for element in ans:
+        if element:
+            continue
+        else:
+            return False
+    return True
+        
+    
+print(valid())
