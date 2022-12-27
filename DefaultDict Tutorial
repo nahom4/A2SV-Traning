@@ -1,0 +1,28 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+from collections import defaultdict
+size = (input()).split()
+n = int(size[0])
+m = int(size[1])
+
+
+
+A = []
+for _ in range(n):
+    A.append(input())
+B = []   
+for _ in range(m):
+    B.append(input())
+    
+C = defaultdict(list)
+
+for i,ele in enumerate(A):
+    C[ele].append(i+1)
+   
+    
+for test in B:
+     value = C[test]
+     if value:
+        print(' '.join(str(i) for i in value))
+     else:
+        print(-1)
+    
