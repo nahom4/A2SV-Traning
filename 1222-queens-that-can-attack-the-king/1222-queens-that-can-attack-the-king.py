@@ -43,7 +43,7 @@ class Solution:
             
             if abs(queen[0]-king[0]) == abs(queen[1]-king[1]):
                 
-                #for cases to check diagonal blocking
+                #four cases to check diagonal blocking
                 for block in queens:
                     blocked = False
                     if abs(queen[0]-block[0]) == abs(queen[1]-block[1]):
