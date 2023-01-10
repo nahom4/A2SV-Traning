@@ -1,0 +1,32 @@
+size = int(input())
+ 
+for _ in range(size):
+    
+    shirt_size = input().split()
+ 
+    if shirt_size[0][-1] > shirt_size[1][-1]:
+        print('<')
+    elif shirt_size[0][-1] < shirt_size[1][-1]:
+ 
+        print('>')
+    else:
+        if not shirt_size[0][-1] == 'M':
+            if shirt_size[0][-1] == 'L':
+                if len(shirt_size[0]) > len(shirt_size[1]):
+                    print('>')
+                elif len(shirt_size[0]) < len(shirt_size[1]):
+                    print('<')
+                else:
+                    print('=')
+            else:
+                if len(shirt_size[0]) > len(shirt_size[1]):
+                    print('<')
+                elif len(shirt_size[0]) < len(shirt_size[1]):
+                    print('>')
+                else:
+                    print('=')
+                
+                
+        else:
+            print('=')
+            
