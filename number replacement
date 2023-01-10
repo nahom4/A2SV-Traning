@@ -1,0 +1,24 @@
+size = int(input())
+ 
+for _ in range(size):
+    length = int(input())
+    arr = input().split()
+    line = input()
+ 
+    dic = dict()
+ 
+    
+    invalid = False
+    for i,num in enumerate(arr):
+        if dic.get(num,0):
+            if dic[num] == line[i]:
+                continue
+            else:
+                invalid = True
+                print("NO")
+                break
+        else:
+            dic[num] = line[i]
+ 
+    if not invalid:
+        print("YES")
