@@ -1,0 +1,23 @@
+from collections import Counter
+ 
+size = int(input())
+ 
+for _ in range(size):
+    
+    n,c = tuple(input().split())
+    n =int(n)
+    c = int(c)
+ 
+    line = input().split()
+ 
+    orbit =  Counter(line)
+    total = 0
+ 
+    for planet in orbit:
+        if orbit[planet] > c:
+            total += c
+ 
+        else:
+            total += orbit[planet]
+    print(total)
+    
