@@ -1,24 +1,25 @@
 class Solution:
     def sortPeople(self, names: List[str], heights: List[int]) -> List[str]:
         
-        dic = {}
+ 
         
         for i in range(len(heights)):
-            dic[heights[i]] = i
-        
-        for i in range(len(heights)):
-            for j in range(len(heights)-1):
+            mx = 0
+            index = 0
+            for j in range(i,len(heights)):
                 
-                if heights[j] < heights[j+1]:
+                if heights[j] > mx:
+                    mx = heights[j]
+                    index = j
                     
-                    heights[j],heights[j+1] = heights[j+1], heights[j]
+            heights[i] , heights[index] = heights[index], heights[i] 
+            names[i],names[index] = names[index],names[i]
+                
+                
+            
                     
-        new = []
-        
-        
-        for x in heights:
-            new.append(names[dic[x]])
-        return new
+     
+        return names
                     
             
         
