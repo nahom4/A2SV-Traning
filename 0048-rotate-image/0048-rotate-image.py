@@ -11,11 +11,9 @@ class Solution:
         matrix[j][n-i] = temp
         return [(j,n-i),value]
     def rotate(self, matrix: List[List[int]]) -> None:
-        """
-        Do not return anything, modify matrix in-place instead.
-        """
+     
         
-        #we can use transformations to solve the problem
+       
         checked = set()
         for i in range(len(matrix)):
             for j in range(len(matrix[0])):
