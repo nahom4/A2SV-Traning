@@ -4,9 +4,9 @@ class Solution:
         
         start = 0
         
-     
+        size = len(t)
         
-        for i in range(len(t)):
+        for i in range(size):
             
             if start < len(s) and t[i] == s[start]:
                 start += 1
