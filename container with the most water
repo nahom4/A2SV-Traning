@@ -1,0 +1,17 @@
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        #let's use two pointers approach
+        i  = 0
+        j = len(height)-1
+        mx = 0
+        while i<j:
+            area = (j-i)*min(height[j],height[i])
+            mx = max(mx,area)
+            print(mx)
+            if height[j] > height[i]:
+                i+=1
+
+
+            else:
+                j-=1
+        return mx
