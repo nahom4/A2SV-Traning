@@ -7,7 +7,7 @@ import math
 class Solution:
     def pairSum(self, head: Optional[ListNode]) -> int:
         
-        #find the middl element
+        #find the middle element
         fast = head
         slow = head
         
@@ -38,6 +38,8 @@ class Solution:
         first = head
         second = middle_head
         mx_sum  = -math.inf
+        
+        #finally let's find the twin sum
         
         while first and second:
             
