@@ -6,32 +6,7 @@
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         
-        #first let's find their sizes
-        
-#         temp = l1
-#         size = 0
-#         while temp:
-#             size +=1
-#             temp = temp.next
-            
-           
-#         temp = l2
-#         size1 = 0
-#         while temp:
-#             size1 +=1
-#             temp = temp.next
-#         if size < size1:
-            
-#             while size < size1:
-#                 l1 = ListNode(0,l1)
-#                 size+=1
-#         elif size1 == size:
-#             pass
-             
-#         else:
-#              while size1 < size:
-#                 l2 = ListNode(0,l2)
-#                 size1+=1
+
         carry = 0
         dummy = ListNode(0)
         temp = dummy
