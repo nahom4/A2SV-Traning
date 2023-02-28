@@ -5,16 +5,25 @@ class Solution:
         
         
         """
-        
-        i = 0
-        j =  len(s)-1
-        
-        while i < j:
+        l = 0
+        r = len(s) - 1
+        def reverse(s,l,r):
             
-            s[i],s[j] = s[j],s[i]
-            i+=1
-            j-=1
+            if l >= r:
+                return None
             
-        return s
+            s[l],s[r] = s[r],s[l]
+            
+            reverse(s,l+1,r-1)
+            return s
+        
+        return reverse(s,l,r)
+      
+        
+        
+        
+        
+        
+        
         
         
