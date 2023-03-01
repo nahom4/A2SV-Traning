@@ -5,36 +5,36 @@
 #         self.next = next
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        
-        new_head = ListNode(0)
-        curr = new_head
-        first = list1
-        second = list2
-        
-        while first != None and second != None:
+        #let's build it recursevely
+        dummy_node = ListNode(0)
+        temp1 = list1
+        temp2 = list2
+        def build(start,first,second):
             
+            if first is None:
+                if second:
+                    start.next = second
+                    
+                return start
+            if second is None:
+                if first:
+                    start.next = first
+                return start
             
             if first.val < second.val:
-                curr.next = first
+                start.next = first
                 first = first.next
+                start = start.next
+                build(start,first,second)
             else:
-                curr.next = second
+                start.next = second
                 second = second.next
-            curr = curr.next
-        if first:
-            curr.next = first
-        if second:
-            curr.next = second
+                start = start.next
+                build(start,first,second)
+                
+        build(dummy_node,temp1,temp2)
+        return dummy_node.next
+
                 
             
-        return new_head.next    
-          
-                
             
-           
-                  
-                
-            
-                
-                
-        
