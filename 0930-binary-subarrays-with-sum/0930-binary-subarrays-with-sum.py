@@ -1,22 +1,23 @@
 class Solution:
     def numSubarraysWithSum(self, nums: List[int], goal: int) -> int:
-        def subarray_counter(nums,k):
-            
-            n = len(nums)
-            count = 0
-            running_sum = 0 
+         def sub_sum(nums,goal):
+            #count number of ones
             left = 0
-            
-            for right in range(n):
-                
-                running_sum += nums[right]
-                
-                while left <= right and running_sum > k:
-                    running_sum -= nums[left]
+            count =  0
+            result = 0
+
+            for right in range(len(nums)):
+                count += nums[right]
+
+                while left <= right and count > goal:
+
+                    count -= nums[left]
                     left += 1
-                    
-                
-                count += right - left + 1
-            return count
-        return subarray_counter(nums,goal) - subarray_counter(nums,goal - 1)
+
+                result += right - left + 1
+
+            return result
+        
+         return sub_sum(nums,goal) - sub_sum(nums,goal - 1)
+       
    
