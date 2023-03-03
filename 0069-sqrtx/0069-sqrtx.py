@@ -7,7 +7,7 @@ class Solution:
         while high > low + 1:
             
             md = low + (high - low)//2
-            print(low,high)
+          
             if md ** 2 <= x:
                 low = md
             else:
