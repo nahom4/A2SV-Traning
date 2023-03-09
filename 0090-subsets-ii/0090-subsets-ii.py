@@ -1,29 +1,25 @@
 class Solution:
     def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
-        result = set()
+        result = []
         ans = []
         nums.sort()
         #the problem is finding combinations of size k
         
         
-        def comb(index,k):
-            
-            if len(ans) == k:
-                new = tuple(ans)
-                if not new in result:
-                    result.add(new)
-                    return
-            
+        def comb(index):
+             
             if index >= len(nums):
+                result.append(ans[::])
                 return
             
-            comb(index + 1,k)
             ans.append(nums[index])
-            comb(index + 1,k)
+            comb(index + 1)
             ans.pop()
             
-        for i in range(0,len(nums) + 1):
-            comb(0,i)
-        
-        result = [list(val) for val in result]
+            while index + 1 < len(nums) and nums[index + 1] == nums[index]:
+                index += 1
+            comb(index + 1)
+           
+            
+        comb(0)
         return result
