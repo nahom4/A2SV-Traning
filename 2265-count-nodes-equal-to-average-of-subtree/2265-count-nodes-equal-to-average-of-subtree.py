@@ -11,9 +11,7 @@ class Solution:
         def average(root):
             if not root:
                 return (0,0)
-            if not root.left and not root.right:
-                self.count += 1
-                return (1,root.val)
+     
 
             left_size,left_val = average(root.left)
             right_size,right_val = average(root.right)
