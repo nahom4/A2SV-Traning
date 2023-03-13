@@ -1,14 +1,7 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        #let's preprocess
-        new = []
-        ans = []
         result = []
-        for x in candidates:
-            val = target // x
-            
-            for _ in range(val):
-                new.append(x)
+        ans  = []
                 
         def comb(index):
             
@@ -20,16 +13,15 @@ class Solution:
             elif sum(ans) > target:
                 return 
             
-            if index >= len(new):
+            if index >= len(candidates):
                 return
-            ans.append(new[index])
-            comb(index + 1)
+            ans.append(candidates[index])
+            comb(index)
             
             ans.pop()
-            
-            while index + 1 < len(new) and new[index] == new[index + 1]:
-                index += 1
+         
             comb(index + 1)
+            
         comb(0)
         
         return result
