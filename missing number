@@ -1,0 +1,16 @@
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        array = nums
+        left  = 0
+        while left < len(array) :
+            if array[left] == 0:
+                left += 1
+                continue
+
+            index = array[left]
+            array[left],array[index - 1] = array[index - 1],array[left]
+            if left == index - 1:
+                left += 1
+        if 0 in array:
+            return array.index(0) + 1
+        return 0
