@@ -1,0 +1,54 @@
+n,k = map(int,input().split())
+array = list(map(int,input().split()))
+for i in range(len(array)):
+    array[i] = [array[i],i]
+final = []
+
+def merge(left_side,right_side):
+    global final
+    first = 0
+    second = 0
+    result = []
+    final = []
+
+    while first < len(left_side) and second < len(right_side):
+
+        if left_side[first][0] >= right_side[second][0]:
+            if left_side[first][0] - right_side[second][0] <= k:
+                result.append(right_side[second])
+                final.append(right_side[second][1] + 1)
+            second += 1
+        else:
+            if right_side[second][0] - left_side[first][0] <= k:
+                result.append(left_side[first])
+                final.append(left_side[first][1] + 1)
+            first += 1
+    while first < len(left_side):
+        final.append(left_side[first][1] + 1)
+        result.append(left_side[first])
+        first += 1
+    while second < len(right_side):
+        final.append(right_side[second][1] + 1)
+        result.append(right_side[second])
+        second += 1
+    
+
+    return result
+
+
+def merge_sort(left,right):
+
+    if left >= right:
+        return [array[left]]
+    
+    md = left + (right - left) // 2
+
+    left_side = merge_sort(left,md)
+    right_side = merge_sort(md + 1, right)
+
+    return merge(left_side,right_side)
+merge_sort(0,len(array) - 1)
+final.sort()
+print(' '.join(list(map(str,final))))
+
+
