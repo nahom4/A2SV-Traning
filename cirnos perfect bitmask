@@ -1,0 +1,55 @@
+test_case = int(input())
+
+for _ in range(test_case):
+    num = int(input())
+
+    #count the ones
+    new = num
+    count = 0
+
+    while num > 0:
+        
+        if num & 1 == 1:
+            count += 1
+        
+        num = num >> 1
+
+      
+    
+  
+    if count == 1:
+        count = 0
+        num = new
+        while num > 0:
+            if num & 1 == 0:
+                break
+            num = num >> 1
+            count += 1
+        value = 2 ** count
+
+        num = new
+        count = 0
+        while num > 0:
+            if num & 1 == 1:
+                break
+            num = num >> 1
+            count += 1
+        m = 2 ** count
+
+        
+        value = value | m
+        print(value)
+        
+    else:
+        count = 0
+        num = new
+        while num > 0:
+            if num & 1 == 1:
+                break
+            num = num >> 1
+            count += 1
+        print(2 ** count)
+       
+
+
+
