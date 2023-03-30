@@ -3,20 +3,31 @@ class Solution:
         
         ans = [0]*len(nums)
         result = []
+        num = 0 
         
-        def backtrack(nums,index):
-            
-            if len(nums) == 0:
+        def backtrack(index):
+            nonlocal num
+            if index >= len(nums):
                 result.append(list(ans))
                 return 
             
             for i in range(len(nums)):
-                ans[index] = nums[i]
-                new = list(nums)
-                new.remove(nums[i])
-                backtrack(new,index + 1)
+                #check here if this number has been used at a particular index
+                start = 1
+                count = i
+                while count > 0:
+                    start = start << 1
+                    count -= 1
                 
-        backtrack(nums,0)
+                if num & start == 0 or num == 0:
+                   
+                    ans[index] = nums[i]
+                    num = num | start
+                    backtrack(index + 1)
+                    num = num ^ start
+                    
+                    
+        backtrack(0)
         return result
             
         
