@@ -1,0 +1,46 @@
+test_case = int(input())
+
+for _ in range(test_case):
+        size = int(input())
+        nums = list(map(int,input().split()))
+        count = 0
+        def merge_sort(left,right):
+            if left >= right:
+                return [nums[left]]
+            md = left + (right - left) // 2
+            left_side = merge_sort(left,md)
+            right_side = merge_sort(md + 1, right)
+            
+            return merge(left_side,right_side)
+        
+        
+        
+        def merge(left_side,right_side):
+           
+            global count
+            res = left_side + right_side
+            temp = list(res)
+            temp.sort()
+            if res == temp:
+                 return res
+
+            count += 1 
+            res = right_side + left_side
+            return res
+            
+        array = merge_sort(0,len(nums) - 1)
+        temp = list(array)
+        temp.sort()
+        if temp == array:
+             print(count)
+        else:
+             print(-1)
+             
+     
+           
+            
+          
+        
+      
+            
+                
