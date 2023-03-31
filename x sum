@@ -1,0 +1,29 @@
+from collections import defaultdict
+test_case = int(input())
+
+for _ in range(test_case):
+    n, m = map(int,input().split())
+    grid =  [ list(map(int,input().split())) for _ in range(n)]
+
+    dic1 = defaultdict(int)
+    dic2 = defaultdict(int)
+    max_val = 0
+    #Row - Col
+    for row in range(len(grid)):
+        for col in range(len(grid[0])):
+        
+            dic1[(row - col)] += grid[row][col]
+    for row in range(len(grid)):
+        for col in range(len(grid[0])):
+            dic2[(row + col)] += grid[row][col]
+   
+
+    for row in range(len(grid)):
+        for col in range(len(grid[0])):
+            left = dic1[(row - col)]
+            right = dic2[(row + col)]
+
+            max_val = max(max_val,(left + right - grid[row][col]))
+    print(max_val)
+
+
