@@ -11,8 +11,8 @@ class Solution:
             if primes[d]:
                 while j <= right:
 
-                    if j % d == 0:
-                        primes[j] = False
+                    # if j % d == 0:
+                    primes[j] = False
 
                     j += d
             if d == 2:
@@ -34,8 +34,8 @@ class Solution:
             if temp_diff < diff:
                 diff = temp_diff
                 res = [prime_factor[i - 1],prime_factor[i]]
-            if diff == 2 and prime_factor[i - 1] != 2:
-                break
+            # if diff == 2 and prime_factor[i - 1] != 2:
+            #     break
                 
         return res
             
