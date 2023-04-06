@@ -1,0 +1,16 @@
+from collections import defaultdict
+n = int(input())
+#print adjecency matrix
+graph = defaultdict(list)
+
+for row in range(n):
+    line = list(map(int,input().split()))
+    for col in range(len(line)):
+        
+        if line[col] == 1:
+            graph[row + 1].append(col + 1)
+            
+
+for key in graph:
+    
+    print(len(graph[key]),*graph[key])
