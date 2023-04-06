@@ -1,0 +1,37 @@
+#take the input it one indexed
+n = int(input())
+
+matrix = [list(map(int,input().split())) for _ in range(n)]
+
+#source no node points to it
+#sink points to no other node
+source = []
+sink = []
+
+for row in range(len(matrix)):
+    flag = False
+    for col in range(len(matrix[0])):
+        if matrix[row][col] == 0:
+            continue
+        else:
+            flag = True
+            break
+    if not flag:
+        sink.append(row + 1)
+    
+for col in range(len(matrix[0])):
+    flag = False
+    for row in range(len(matrix)):
+        if matrix[row][col] == 0:
+            continue
+        else:
+            flag = True
+            break
+        
+    if not flag:
+        source.append(col + 1)
+
+# source = list(map(str,source))
+# sink = list(map(str,sink))      
+print(len(source),*source)
+print(len(sink),*sink)
