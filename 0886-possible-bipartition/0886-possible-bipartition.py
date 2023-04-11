@@ -10,29 +10,20 @@ class Solution:
             
        #dfs
 
-        def dfs(node,group):
+        def dfs(node,my_group,enemy_group):
             
-            if group:
-                if node in two:
-                    return False
-                if node not in one:
-                    one.add(node)
-                else:
-                    return True
-            else:
-                if node in one:
-                    return False
-                if node not in two:
-                    two.add(node)
-                else:
-                    return True
-                
+            if node in my_group:
+                return True
+            if node in enemy_group:
+                return False
+            my_group.add(node)
+            
             #iterate over the enemies
             if node not in graph:
                 return True
             
             for enemy in graph[node]:
-                valid = dfs(enemy,not group)
+                valid = dfs(enemy,enemy_group,my_group)
                 if not valid:
                     return False
                 
@@ -43,7 +34,7 @@ class Solution:
         for person in graph:
             if not person in one and not person in two:
                 one,two = set(),set()
-                valid = dfs(person,True)
+                valid = dfs(person,one,two)
                 if not valid:
                     return False
         return True
