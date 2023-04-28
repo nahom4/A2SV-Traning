@@ -3,7 +3,6 @@ class Solution:
         
         queue = deque()
         res = -1
-        visited = set((0,0))
         target = (len(grid) - 1, len(grid[0]) - 1)
         if grid[0][0] == 1:
             return -1
@@ -22,17 +21,14 @@ class Solution:
             if (row,col) == target:
                 res = level
                 break
-          
-           
-                
+              
             #move in the 8 directions
-            
             for r in range(row - 1,row + 2):
                 for c in range(col - 1,col + 2):
                                         
-                    if (r,c) not in visited and in_bound((r,c)) and grid[r][c] == 0:
+                    if in_bound((r,c)) and grid[r][c] == 0:
                         queue.append((r,c,level + 1))
-                        visited.add((r,c))
+                        grid[r][c] = 1
                         
                         
         return res
