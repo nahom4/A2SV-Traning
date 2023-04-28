@@ -23,7 +23,7 @@ class Solution:
                 res = level
                 break
           
-            visited.add((0,0))
+           
                 
             #move in the 8 directions
             
