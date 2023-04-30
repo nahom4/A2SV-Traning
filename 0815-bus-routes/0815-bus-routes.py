@@ -32,17 +32,15 @@ class Solution:
                 for city in routes[bus_no]:
 
                     if city == target:
-                        reached = True
+                        return res
                     
-                    if reached:
-                        break
+                 
                     for val in graph[city]:
                         if not val in visited:
                             visited.add(val)
                             queue.append(val)
-            if reached:
-                    break
-        return res if reached else -1
+           
+        return -1
                     
             
             
