@@ -1,0 +1,19 @@
+class Solution(object):
+    def findTargetSumWays(self, nums, target):
+        
+        cache = {}
+        
+        def backtrack(index,sm):
+            
+            if index == len(nums):
+                return 1 if sm == target else 0
+            
+            if (index,sm) in cache:
+                return cache[(index,sm)]
+            
+            cache[(index,sm)] = backtrack(index + 1,sm + nums[index]) + backtrack(index +1,sm - nums[index])
+            
+            return cache[(index,sm)]
+        
+        
+        return backtrack(0,0)
