@@ -1,0 +1,37 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def rob(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        chache = {}
+        
+        def dp(node):
+            
+            if node == None:
+                return 0
+            
+            if node in chache:
+                return chache[node]
+            # two choices either take the node or leave it
+            leave = dp(node.left) + dp(node.right)
+            take = node.val
+            if node.left:
+                take += dp(node.left.left) + dp(node.left.right)
+                
+            if node.right:
+                take += dp(node.right.left) + dp(node.right.right)
+                
+            chache[node] = max(take,leave)
+            
+            return chache[node]
+        
+        return dp(root)
+            
+        
