@@ -28,8 +28,7 @@ class Solution:
             sm[first_parent] += sm[second_parent]
         
         answer = [0]
-        sum_list = []
-        heapq.heapify(sum_list)
+        max_sum = 0
         
         for i in range(n - 1,0,-1):
             index = removeQueries[i]
@@ -43,10 +42,8 @@ class Solution:
               
             parent = find(index)   
             total = sm[parent]
-            heapq.heappush(sum_list,-total)
-            result = heapq.heappop(sum_list)
-            answer.append(-result)
-            heapq.heappush(sum_list,result)
+            max_sum = max(total,max_sum)
+            answer.append(max_sum)
         return answer[:: -1]
             
         
