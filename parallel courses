@@ -1,0 +1,32 @@
+from collections import defaultdict,deque
+def parallelCourses(n, prerequisites):
+ 
+    # Write your code here.
+    graph = defaultdict(list)
+    queue = deque()
+    visited = set()
+    in_degree = [0] * (n + 1)
+    for u,v in prerequisites:
+        graph[u].append(v)
+        in_degree[v] += 1
+
+    for i in range(1,n + 1):
+        if in_degree[i] == 0:
+            queue.append(i)
+            visited.add(i)
+    
+    semister = 0
+    while queue:
+        semister += 1
+        size = len(queue)
+
+        for _ in range(size):
+            node = queue.popleft()
+            for child in graph[node]:
+
+                in_degree[child] -= 1
+                if in_degree[child] == 0:
+                    queue.append(child)
+                    visited.add(child)
+
+    return semister if len(visited) == n else -1 
