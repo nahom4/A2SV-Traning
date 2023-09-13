@@ -1,0 +1,28 @@
+testCases = int(input())
+for _ in range(testCases):
+    n = int(input())
+    array = list(map(int,input().split()))
+    negative = float('-inf')
+    positive = float('-inf')
+    total = 0
+
+    for i in range(n):
+       
+        if array[i] < 0:
+            if positive != float('-inf'):
+                total += positive
+                positive = float('-inf')
+
+            negative = max(negative,array[i])
+
+        elif array[i] > 0:
+            if negative != float('-inf'):
+                total += negative
+                negative = float('-inf')
+            positive = max(array[i],positive)
+
+    if positive != float('-inf'):
+        total += positive
+    if negative != float('-inf'):
+        total += negative
+    print(total)
