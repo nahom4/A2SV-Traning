@@ -1,51 +1,55 @@
 class Solution:
     def minCostConnectPoints(self, points: List[List[int]]) -> int:
-        #maybe a brute force approach might be possible calculate the distance
-        #between each point and sort them then connect 
+        points = list(map(tuple,points))
+        rep = {point : point for point in points}
+        rank = {point : 1 for point in points}
         
-        def manhattan_distance(i,j):
-            x1,y1 = points[i]
-            x2,y2 = points[j]
-            return abs(x2 - x1) + abs(y2 - y1)
-        n = len(points) 
-        rep = {i : i for i in range(n)}
-        size = {i : 1 for i in range(n)}
-        total = 0
         def find(node):
-            parent = node
-            while rep[parent] != parent:
-                parent = rep[parent]
-                
-            while rep[node] != node:
-                temp = rep[node]
-                rep[node] = parent
-                node = temp
             
+            if node == rep[node]:
+                return node
+            
+            parent = find(rep[node])
+            rep[node] = parent
             return parent
         
-        def union(node1,node2,cost):
-            nonlocal total
-            first_parent,second_parent = find(node1),find(node2)
+        
+        def union(firstNode,secondNode):
+            firstNodeParent,secondNodeParent = find(firstNode),find(secondNode)
             
-            if first_parent == second_parent:
-                return
+            if firstNodeParent == secondNodeParent:
+                return False
             
-            if size[first_parent] < size[second_parent]:
-                first_parent,second_parent = second_parent,first_parent
-            
-            size[first_parent] += second_parent
-            rep[second_parent] = first_parent
-            
-            total += cost
-           
-        distance = []
-        for i in range(len(points)):
-            for j in range(i + 1,len(points)):
-                distance.append([manhattan_distance(i,j),i,j])
+            if rank[firstNodeParent] < rank[secondNodeParent]:
+                firstNodeParent,secondNodeParent = secondNodeParent,firstNodeParent
                 
-        distance.sort()
-        for val in distance:
-            cost,node1,node2 = val
-            union(node1,node2,cost)
+            rep[secondNodeParent] = firstNodeParent
+            rank[firstNodeParent] += rank[secondNodeParent]
+            return True
             
-        return total
+        def manhattanDistance(pointA,pointB):
+            xA,yA = pointA
+            xB,yB = pointB
+            
+            return abs(xA - xB) + abs(yA - yB)
+            
+        pairs = []
+        N = len(points)
+        for i in range(N):
+            for j in range(N):
+                if i == j: 
+                    continue
+                pairs.append((manhattanDistance(points[i],points[j]),points[i],points[j]))
+                
+        pairs.sort()
+        minCost = 0
+        for distance,pairA,pairB in pairs:
+            if union(pairA,pairB):
+                minCost += distance
+                
+                
+        return minCost
+                
+            
+            
+        
