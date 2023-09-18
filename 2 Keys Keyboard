@@ -1,0 +1,24 @@
+class Solution:
+    def minSteps(self, n: int) -> int:
+        @cache
+        def copyPaste(clipBoard,size,noOpp):
+            
+            if size == n:
+                return noOpp
+            
+            if size > n:
+                return float('inf')
+            
+            paste = float('inf')
+            if clipBoard > 0:
+                paste = copyPaste(clipBoard,size + clipBoard,noOpp + 1)
+           
+            copy = float('inf')
+            if size != clipBoard:
+                copy = copyPaste(size,size,noOpp + 1)
+            
+            return min(paste,copy)
+            
+        
+        return copyPaste(0,1,0)
+        
