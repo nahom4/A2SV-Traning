@@ -25,33 +25,22 @@ class Solution:
             else:
                 return False
             
-        graph = defaultdict(list)
+        words = sorted(words,key= lambda word : len(word))
+        cache = {}
+        finalAns = 1
         N = len(words)
         for i in range(N):
-            for j in range(N):
-                if isPredecessor(words[i],words[j]):
-                    graph[i].append(j)
-          
-    
-        #dfs
-        # words = list(map(lambda words : len(word),words))
-        cache = {}
-        def dfs(node):
+            maxLength = 0
+            for j in range(i):
+                if isPredecessor(words[j],words[i]):
+                    maxLength = max(maxLength,cache[j])
+                    
+            cache[i] = maxLength + 1
+            finalAns = max(finalAns,cache[i])
             
-            if node in cache:
-                return cache[node]
-            depth = 0
-            for child in graph[node]:
-                depth = max(dfs(child),depth)
-                
-            cache[node] = depth + 1
-            return cache[node]
         
-        finalAns = 1
-        for i in range(N):
-            finalAns = max(finalAns,dfs(i))
-            
         return finalAns
+                    
             
                 
         
