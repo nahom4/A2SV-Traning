@@ -12,25 +12,18 @@ class Solution:
         
         def dfs(node):
             if node == None:
-                return False 
+                return 0
+            
             left = dfs(node.left)
             right = dfs(node.right)
-            
-            count = 0
-            if left:
-                count += 1
-            if right:
-                count += 1
-                
+            count = left + right 
             if node.val == p.val or node.val == q.val:
                 count += 1
                 
             if count == 2:
                 self.ans = node
-                return False
-            
-            if count >= 1:
-                return True
+                return 0
+            return count 
         dfs(root)
         return self.ans
                 
