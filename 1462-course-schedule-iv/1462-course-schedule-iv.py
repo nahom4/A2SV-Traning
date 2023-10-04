@@ -1,41 +1,33 @@
 class Solution:
     def checkIfPrerequisite(self, numCourses: int, prerequisites: List[List[int]], queries: List[List[int]]) -> List[bool]:
         
-        graph = defaultdict(list)
-        visited = set()
-        in_degree = [0] * numCourses
-        queue = deque()
-        dependancy = [set() for _ in range(numCourses)]
+        grid = [[float("inf")] * numCourses for _ in range(numCourses)]
+    
+        for preReq,course in prerequisites:
+            grid[preReq][course] = 1
         
-        for a, b in prerequisites:
-            graph[a].append(b)
-            in_degree[b] += 1
-       
-        for index in range(numCourses):
-            if in_degree[index] == 0:
-                queue.append(index)
-                
-        
-        while queue:
-            node = queue.popleft()
-            
-            for child in graph[node]:
-               
-                dependancy[child].add(node)
-                dependancy[child].update(dependancy[node])
-                if not child in visited:
-                    in_degree[child] -= 1
-                    if in_degree[child] == 0:
-                        queue.append(child)
-                        visited.add(child)
-
-        answer = []
-        
-        for a,b in queries:
-            if a in dependancy[b]:
-                answer.append(True)
+        for k in range(numCourses):
+            for i in range(numCourses):
+                for j in range(numCourses):
+                    grid[i][j] = min(grid[i][j],(grid[i][k] + grid[k][j]))
+                    
+        ans = []
+        for preReq,course in queries:
+            if grid[preReq][course] == float("inf"):
+                ans.append(False)
             else:
-                answer.append(False)
+                ans.append(True)
                 
-        return answer
-                
+        return ans
+                    
+                    
+            
+            
+            
+        
+        
+        
+       
+                    
+        
+        
