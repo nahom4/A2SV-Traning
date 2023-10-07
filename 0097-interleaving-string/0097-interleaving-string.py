@@ -1,34 +1,29 @@
 class Solution:
     def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
-        """
-            "aabcc"
-            "dbbca"
-            "aadbbcbcac"
-        """
-        @cache
-        def dp(i,j):
-            
-            a = len(s1)
-            b = len(s2)
-            c = len(s3)
-            
-            if i >= a and j >= b and (i + j ) >= c:
-                return True
-            
-            if (i + j) >= c:
-                return False
-            
-            if i >= a and j >= b:
-                return False
-            
-            top = bottom = False
-            if i < a and s1[i] == s3[i + j]:
-                top = dp(i + 1,j)
-                
-            if j < b and s2[j] == s3[i + j]:
-                bottom = dp(i, j + 1)
-                
+       
+        a,b,c = len(s1),len(s2),len(s3)
+        if a + b != c:
+            return False
         
-            return top or bottom
+        grid = [[False] * (a + 1) for _ in range(b + 1)]
+         
+        grid[0][0] = True
+        for i in range(b + 1):
+            for j in range(a + 1):
+                
+                if j - 1 >= 0 and s1[j - 1] == s3[j + i - 1]: #i = j = 1
+                    grid[i][j] |= grid[i][j - 1]
         
-        return dp(0,0)
+                if i - 1 >= 0 and s2[i - 1] == s3[j + i - 1]:
+                    grid[i][j] |= grid[i - 1][j]
+                
+        return grid[b][a]         
+        
+                
+                
+                
+                
+                
+       
+    
+        
