@@ -1,14 +1,11 @@
 class Solution:
     def smallestEquivalentString(self, s1: str, s2: str, baseStr: str) -> str:
         
-        rep = {letter : letter for letter in (string.ascii_lowercase)}
-        
-        size = {letter : 1 for letter in (string.ascii_lowercase)}
-        
-        
+        rep = {letter : letter for letter in s1 + s2}
+        rank = {letter : 1 for letter in s1 + s2}
+        letters = {letter : {letter} for letter in s1 + s2}
         def find(node):
-            
-            if rep[node] == node:
+            if node == rep[node]:
                 return node
             
             parent = find(rep[node])
@@ -16,37 +13,35 @@ class Solution:
             
             return parent
         
-        def union(node1,node2):
-            first_parent,second_parent = find(node1),find(node2)
+        def union(first,second):
+            firstParent,secondParent = find(first),find(second)
             
-            if first_parent == second_parent:
+            if firstParent == secondParent:
                 return 
             
-            if size[first_parent] < size[second_parent]:
-                first_parent,second_parent = second_parent,first_parent
+            if rank[firstParent] > rank[secondParent]:
+                firstParent,secondParent = secondParent,firstParent
                 
-            size[first_parent] += size[second_parent]
-            rep[second_parent] = first_parent
             
-        for char1,char2 in zip(s1,s2):
-            union(char1,char2)
+            rep[secondParent] = firstParent
+            rank[firstParent] += rank[secondParent]
+            letters[firstParent].update(letters[secondParent])
             
-        char_dict = defaultdict(list)
-        for char in string.ascii_lowercase:
-            parent = find(char)
-            if not char_dict[parent]:
-                char_dict[parent].append(char)
-                
-        answer = []
-        
-        for char in baseStr:
-            parent = find(char)
-            answer.append(char_dict[parent][0])
             
-        return "".join(answer)
-        
-                
-                
-                
-        
-        
+        for first,second in zip(s1,s2):
+            union(first,second)
+            
+        ans = []
+        for key in letters:
+            letters[key] = sorted(list(letters[key]))
+            
+        for letter in baseStr:
+            if not letter in rep:
+                ans.append(letter)
+                continue
+            parent = find(letter)
+            ans.append(letters[parent][0])
+    
+        return "".join(ans)
+            
+            
