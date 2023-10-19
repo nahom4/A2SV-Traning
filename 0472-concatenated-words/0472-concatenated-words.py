@@ -1,33 +1,64 @@
+class Trie:
+    def __init__(self):
+        self.children = {}
+        self.isEnd = False
+        
+    def addWord(self,word):
+        N = len(word)
+        pool = self.children
+        for i in range(N):
+            if not word[i] in pool:
+                pool[word[i]] = Trie()
+                
+            node = pool[word[i]]
+            pool = node.children
+            
+        node.isEnd = True
+        
+    def findWord(self,word):
+        N = len(word)
+        node = self
+        pool = self.children
+        for i in range(N):
+            if not word[i] in pool:
+                return False
+                
+            node = pool[word[i]]
+            pool = node.children
+
+        return node.isEnd
+
 class Solution:
     def findAllConcatenatedWordsInADict(self, words: List[str]) -> List[str]:
-        dictionary = set(words)
-        
-        def  numWords(word):
-            N = len(word)
-            cache = {N : 0}
-            def dp(i):
-                if i in cache:
-                    return cache[i]
-                
-                count = 0
-                for j in range(i, N):
-                    sub = word[i : j + 1]
-                    if sub in dictionary:
-                        prevCount = dp(j + 1)
-                        
-                        if prevCount == 0 and j != N - 1:
-                            continue
-                        
-                        count = max(count ,prevCount + 1)
-                    
-                cache[i] = count
-                return count
+        trie = Trie()
+        wordSet = set(words)
+        @cache
+        def dp(word):
+            if word == "":
+                return 0
             
-            return dp(0)
-                            
+            N = len(word)
+            valid = False
+            count = float("-inf")
+            for i in range(N):
+                prevCount = float("-inf")
+                sub = word[ : i + 1]
+
+                if trie.findWord(sub):
+                    prevCount = dp(word[i + 1 :]) + 1
+
+                count = max(count,prevCount)
+               
+            return count 
         ans = []
+        
         for word in words:
-            if numWords(word) > 1:
+            trie.addWord(word)
+          
+        for word in words:
+            if dp(word) > 1:
                 ans.append(word)
-                
+           
         return ans
+                
+            
